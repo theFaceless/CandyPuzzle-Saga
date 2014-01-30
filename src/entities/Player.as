@@ -56,7 +56,7 @@ package entities
 				y -= speed;
 				
 			}
-			if (Input.check(Key.DOWN)) {
+			if (Input.check(Key.DOWN) && !collideWith(MainWorld.map,x,y+speed)) {
 				y += speed;
 			}
 			

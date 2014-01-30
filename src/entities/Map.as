@@ -19,7 +19,7 @@ package entities
 		override public function added(): void {
 			image = new Image(assets.MapTemplate);
 			image.color = 0x33FF33;
-			setHitboxTo(new Pixelmask(assets.MapTemplate));
+			mask = new Pixelmask(assets.MapTemplate)
 			graphic = image;
 		}
 		
