@@ -9,24 +9,20 @@ package entities
 	import net.flashpunk.utils.Draw;
 	import net.flashpunk.Sfx;
 	
-	import world.Lost;
-	import world.Manager
-	
 	/**
 	 * ...
 	 * @author Axel Faes
 	 */
-	public class Player extends Entity
-	{
+	public class Player extends Entity {
 		protected var speed:Number;
 		protected var l:String, r:String, u:String, d:String;
 
-		public function Player() 
-		{
+		public function Player(w:int, h:int, sprite: Class, type: String, speed:int) {
 			//to use player:
 			//call init
 			//call setpos
 			//call setInputMap
+			init(w, h, sprite, type, speed);
 		}
 		
 		//initiate the player
@@ -39,7 +35,7 @@ package entities
 			this.type = type;
 		}
 		
-		public function makeImg(sprite: Class) {
+		public function makeImg(sprite: Class): void {
 			var img:Image = new Image(sprite);
 			img.scaledHeight = height;
 			img.scaledWidth = width;
@@ -71,6 +67,7 @@ package entities
 		//update the player
 		override public function update():void { 
 			processInput();
+			trace("ok");
 		}
 		
 		public function setInputMap(l: String, r:String, d:String, u:String):void {
@@ -81,7 +78,8 @@ package entities
 		}
 		
 		public function notColliding(xn:int, yn:int):Boolean {
-			return !collide("solid", xn, yn);
+			//return !collide("solid", xn, yn);
+			return true;
 		}
 		
 		//process incoming input
@@ -90,6 +88,7 @@ package entities
 			
 			if (Input.check(u) && notColliding(x, y-sp) && y-sp>0) {
 				y -= sp;
+				
 			}
 			if (Input.check(d) && notColliding(x, y+sp) && y+height+sp < FP.width) {
 				y += sp;
