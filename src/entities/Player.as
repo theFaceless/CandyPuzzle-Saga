@@ -53,7 +53,7 @@ package entities
 		 * @param	y
 		 */
 		public function collideWithMap(x:int, y:int):Boolean {
-			return Boolean (collideWith(MainWorld.map, x, y));
+			return Boolean (collideWith(MainWorld.map, x- image.width / 2, y - image.height / 2));
 		}
 		
 		
@@ -62,14 +62,13 @@ package entities
 			hasMoved = false;
 			var i: int;
 			if (Input.check(Key.UP)) {
-				
 				for (i = 0; i < 10 && !hasMoved; i++ ) {
-					if (!collideWithMap((x + i) - image.width / 2, y - (speed*FP.elapsed) - image.height / 2)) {
+					if (!collideWithMap((x + i), y - (speed*FP.elapsed))) {
 						y -= speed * FP.elapsed;
 						x += i;
 						hasMoved = true;
 					}
-					else if (!collideWithMap((x - i) - image.width / 2, y - (speed*FP.elapsed) - image.height / 2)) {
+					else if (!collideWithMap((x - i), y - (speed*FP.elapsed))) {
 						y -= speed * FP.elapsed;
 						x -= i;
 						hasMoved = true;
@@ -77,15 +76,15 @@ package entities
 				}
 				
 			}
+			hasMoved = false;
 			if (Input.check(Key.DOWN)) {
-				
 				for (i = 0; i < 10 && !hasMoved; i++ ) {
-					if (!collideWithMap((x+i) - image.width / 2, y + (speed*FP.elapsed) - image.height / 2)) {
+					if (!collideWithMap((x+i), y + (speed*FP.elapsed))) {
 						y += speed * FP.elapsed;
 						x += i;
 						hasMoved = true;
 					}
-					else if (!collideWithMap((x-i) - image.width / 2, y + (speed*FP.elapsed) - image.height / 2)) {
+					else if (!collideWithMap((x-i) - image.width / 2, y + (speed*FP.elapsed))) {
 						y += speed * FP.elapsed;
 						x -= i;
 						hasMoved = true;
@@ -93,14 +92,37 @@ package entities
 				}
 				
 			}
-			
-			if (Input.check(Key.LEFT) && !collideWithMap(x-speed-image.width/2,y-image.height/2)) {
-				x -= 10;
-				hasMoved = true;
+			hasMoved = false;
+			if (Input.check(Key.LEFT)) {
+				for (i = 0; i < 10 && !hasMoved; i++ ) {
+					if (!collideWithMap(x - speed * FP.elapsed, (y+i))) {
+						x -= speed * FP.elapsed;
+						y += i;
+						hasMoved = true;
+					}
+					if (!collideWithMap(x - speed * FP.elapsed, (y-i))) {
+						x -= speed * FP.elapsed;
+						y -= i;
+						hasMoved = true;
+					}
+				}
+				
 			}
-			if (Input.check(Key.RIGHT)&& !collideWithMap(x+speed-image.width/2,y-image.height/2)) {
-				x += 10;
-				hasMoved = true;
+			hasMoved = false;
+			if (Input.check(Key.RIGHT)) {
+				for (i = 0; i < 10 && !hasMoved; i++ ) {
+					if (!collideWithMap(x + speed * FP.elapsed, (y+i))) {
+						x += speed * FP.elapsed;
+						y += i;
+						hasMoved = true;
+					}
+					if (!collideWithMap(x + speed * FP.elapsed, (y-i))) {
+						x += speed * FP.elapsed;
+						y -= i;
+						hasMoved = true;
+					}
+				}
+				
 			}
 			
 		}
