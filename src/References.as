@@ -7,7 +7,8 @@ package
 	public class References 
 	{
 		
-		public static var pathWitdh:int = 30;
+		public static const PATHWIDTH:int = 30;
+		public static const SPEED: int = 10;
 	}
 
 }
