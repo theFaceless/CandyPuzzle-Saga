@@ -23,6 +23,7 @@ package entities
 		
 		protected var startX:int;
 		protected var startY:int;
+		protected var hasMoved: Boolean;
 
 		public function Player(startX: int, startY: int) {
 			super();
@@ -58,20 +59,50 @@ package entities
 		
 		//process incoming input
 		protected function processInput():void {
-			if (Input.check(Key.UP) && !collideWithMap(x-image.width/2,y-speed-image.height/2)) {
-				y -= speed;
+			hasMoved = false;
+			var i: int;
+			if (Input.check(Key.UP)) {
+				
+				for (i = 0; i < 10 && !hasMoved; i++ ) {
+					if (!collideWithMap((x + i) - image.width / 2, y - (speed*FP.elapsed) - image.height / 2)) {
+						y -= speed * FP.elapsed;
+						x += i;
+						hasMoved = true;
+					}
+					else if (!collideWithMap((x - i) - image.width / 2, y - (speed*FP.elapsed) - image.height / 2)) {
+						y -= speed * FP.elapsed;
+						x -= i;
+						hasMoved = true;
+					}
+				}
 				
 			}
-			if (Input.check(Key.DOWN) && !collideWithMap(x-image.width/2,y+speed-image.height/2)) {
-				y += speed;
+			if (Input.check(Key.DOWN)) {
+				
+				for (i = 0; i < 10 && !hasMoved; i++ ) {
+					if (!collideWithMap((x+i) - image.width / 2, y + (speed*FP.elapsed) - image.height / 2)) {
+						y += speed * FP.elapsed;
+						x += i;
+						hasMoved = true;
+					}
+					else if (!collideWithMap((x-i) - image.width / 2, y + (speed*FP.elapsed) - image.height / 2)) {
+						y += speed * FP.elapsed;
+						x -= i;
+						hasMoved = true;
+					}
+				}
+				
 			}
 			
 			if (Input.check(Key.LEFT) && !collideWithMap(x-speed-image.width/2,y-image.height/2)) {
-				x -= speed;
+				x -= 10;
+				hasMoved = true;
 			}
 			if (Input.check(Key.RIGHT)&& !collideWithMap(x+speed-image.width/2,y-image.height/2)) {
-				x += speed;
+				x += 10;
+				hasMoved = true;
 			}
+			
 		}
 		
 	}

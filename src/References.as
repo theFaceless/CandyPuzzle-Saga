@@ -8,7 +8,7 @@ package
 	{
 		
 		public static const PATHWIDTH:int = 30;
-		public static const SPEED: int = 10;
+		public static const SPEED: int = 100;
 	}
 
 }
