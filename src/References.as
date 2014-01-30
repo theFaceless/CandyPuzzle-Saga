@@ -8,8 +8,6 @@ package
 	{
 		
 		public static var pathWitdh:int = 30;
-		
-		
 	}
 
 }
