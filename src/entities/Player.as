@@ -4,6 +4,7 @@ package entities
 	import net.flashpunk.Entity;
 	import net.flashpunk.graphics.Image;
 	import net.flashpunk.FP;
+	import net.flashpunk.masks.Pixelmask;
 	import net.flashpunk.utils.Input;
 	import net.flashpunk.utils.Key;
 	import net.flashpunk.utils.Draw;
@@ -18,29 +19,25 @@ package entities
 		protected var l:String, r:String, u:String, d:String;
 
 		public function Player(w:int, h:int, sprite: Class, type: String, speed:int) {
-			//to use player:
-			//call init
-			//call setpos
-			//call setInputMap
 			init(w, h, sprite, type, speed);
 		}
 		
 		//initiate the player
 		public function init(w:int, h:int, sprite: Class, type: String, speed:int):void {
-			setSize(w, h);
-			makeImg(sprite);
+			makeImg(sprite,w,h);
 			
 			setSpeed(speed);
 			
 			this.type = type;
 		}
 		
-		public function makeImg(sprite: Class): void {
+		public function makeImg(sprite: Class, width:int, height:int): void {
 			var img:Image = new Image(sprite);
 			img.scaledHeight = height;
 			img.scaledWidth = width;
 			
 			graphic = img;
+			mask = new Pixelmask(sprite);
 		}
 		
 		public function setSpeed(sp:int):void {
@@ -52,12 +49,6 @@ package entities
 			FP.world.remove(this);
 		}
 		
-		//set the size
-		public function setSize(width:int, height:int):void {
-			this.width = width;
-			this.height = height;
-		}
-		
 		//set the position
 		public function setPos(xpos:int, ypos: int): void {
 			x = xpos;
@@ -67,7 +58,6 @@ package entities
 		//update the player
 		override public function update():void { 
 			processInput();
-			trace("ok");
 		}
 		
 		public function setInputMap(l: String, r:String, d:String, u:String):void {
@@ -78,7 +68,7 @@ package entities
 		}
 		
 		public function notColliding(xn:int, yn:int):Boolean {
-			//return !collide("solid", xn, yn);
+			//return !collide(Map, xn, yn);
 			return true;
 		}
 		
