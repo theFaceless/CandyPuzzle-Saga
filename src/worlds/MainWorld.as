@@ -17,16 +17,15 @@ package worlds
 		public static var map: Map = new Map();
 		public static var playerTopLeft: Player = new Player(40, 40);
 		public static var playerTopRight: Player = new Player(760, 40);
+		public static var playerBottomLeft: Player = new Player(40, 560);
+		public static var playerBottomRight: Player = new Player(760, 560);
 		
 		public function MainWorld() {
 			
-			Input.define("left", Key.LEFT);
-			Input.define("right", Key.RIGHT); 
-			Input.define("up", Key.UP);
-			Input.define("down", Key.DOWN);
-			
 			playerTopLeft.setInputMap("left", "right", "down", "up");
 			playerTopRight.setInputMap("left", "right", "down", "up");
+			playerBottomLeft.setInputMap("left", "right", "down", "up");
+			playerBottomRight.setInputMap("left", "right", "down", "up");
 			
 			
 		}
@@ -35,6 +34,8 @@ package worlds
 			add(map);
 			add(playerTopLeft);
 			add(playerTopRight);
+			add(playerBottomLeft);
+			add(playerBottomRight);
 		}
 		
 		override public function update(): void {
