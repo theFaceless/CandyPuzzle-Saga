@@ -1,5 +1,6 @@
 package worlds 
 {
+	import entities.Map;
 	import entities.Player;
 	import net.flashpunk.World;
 	
@@ -22,6 +23,7 @@ package worlds
 			Input.define("down", Key.DOWN);
 			player.setInputMap("left", "right", "down", "up");
 			
+			add(new Map());
 			add(player);
 		}
 		
