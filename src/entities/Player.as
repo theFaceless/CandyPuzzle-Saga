@@ -35,9 +35,9 @@ package entities
 			var img:Image = new Image(sprite);
 			img.scaledHeight = height;
 			img.scaledWidth = width;
-			
 			graphic = img;
-			mask = new Pixelmask(sprite);
+			
+			setHitbox(width, height);
 		}
 		
 		public function setSpeed(sp:int):void {
