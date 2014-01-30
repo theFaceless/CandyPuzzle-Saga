@@ -32,7 +32,8 @@ package entities
 			image = new Image(assets.playerIMG);
 			image.centerOrigin();
 			graphic = image;
-			setHitbox(image.width, image.height, -(image.width / 2), -(image.height / 2));
+			setHitbox(image.width, image.height, 0, 0);
+			
 		}
 		
 		override public function update():void { 
@@ -52,18 +53,18 @@ package entities
 		//process incoming input
 		protected function processInput():void {
 			
-			if (Input.check(Key.UP)) {
+			if (Input.check(Key.UP) && !collideWith(MainWorld.map,x-image.width/2,y-speed-image.height/2)) {
 				y -= speed;
 				
 			}
-			if (Input.check(Key.DOWN) && !collideWith(MainWorld.map,x,y+speed)) {
+			if (Input.check(Key.DOWN) && !collideWith(MainWorld.map,x-image.width/2,y+speed-image.height/2)) {
 				y += speed;
 			}
 			
-			if (Input.check(Key.LEFT)) {
+			if (Input.check(Key.LEFT) && !collideWith(MainWorld.map,x-speed-image.width/2,y-image.height/2)) {
 				x -= speed;
 			}
-			if (Input.check(Key.RIGHT)) {
+			if (Input.check(Key.RIGHT)&& !collideWith(MainWorld.map,x+speed-image.width/2,y-image.height/2)) {
 				x += speed;
 			}
 		}
