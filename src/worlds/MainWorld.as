@@ -21,13 +21,7 @@ package worlds
 		public static var playerBottomRight: Player = new Player(760, 560);
 		
 		public function MainWorld() {
-			
-			playerTopLeft.setInputMap("left", "right", "down", "up");
-			playerTopRight.setInputMap("left", "right", "down", "up");
-			playerBottomLeft.setInputMap("left", "right", "down", "up");
-			playerBottomRight.setInputMap("left", "right", "down", "up");
-			
-			
+			super();
 		}
 		
 		override public function begin(): void {
