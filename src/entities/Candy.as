@@ -12,10 +12,11 @@ package entities
 		
 		private var image: Image;
 		
-		public function Candy(x: int, y: int) {
+		public function Candy(maze: int, tileX: int, tileY: int) {
 			super();
-			this.x = x;
-			this.y = y;
+			x = Map.getXBytileX(maze, tileX);
+			y = Map.getYBytileY(maze, tileY);
+			layer = 1;
 		}
 		
 		override public function added(): void {

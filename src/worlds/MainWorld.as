@@ -5,6 +5,7 @@ package worlds
 	import entities.Map;
 	import entities.Player;
 	import net.flashpunk.World;
+	import utils.WorldSwitcher;
 	
 	import net.flashpunk.utils.Input;
 	import net.flashpunk.utils.Key;
@@ -30,22 +31,33 @@ package worlds
 		
 		public function MainWorld(mapId: int = 0) {
 			super();
-			//testing code
-			mapId = -1;
-			//end of testing code
+			
 			map = new Map(mapId);
-			if (mapId <= 0) {
-				playerTopLeft = new Player(map.getXBytileX(0, 0), map.getYBytileY(0, 0));
-				playerTopRight = new Player(map.getXBytileX(1, 0), map.getYBytileY(0, 0));
-				playerBottomLeft = new Player(map.getXBytileX(0, 0), map.getYBytileY(1, 0));
-				playerBottomRight = new Player(map.getXBytileX(1, 0), map.getYBytileY(1, 0));
+			
+			//add maps here (3/ 4)
+			if (mapId == 0) {
+				playerTopLeft = new Player(Map.TOPLEFT, 0, 0);
+				playerTopRight = new Player(Map.TOPRIGHT, 5, 0);
+				playerBottomLeft = new Player(Map.BOTTOMLEFT, 0, 0);
+				playerBottomRight = new Player(Map.BOTTOMRIGHT, 2, 2);
 				
-				candyTopLeft = new Candy(map.getXBytileX(0, 2), map.getYBytileY(0, 3));
-				candyTopRight = new Candy(map.getXBytileX(1, 7), map.getYBytileY(0, 5));
-				candyBottomLeft = new Candy(map.getXBytileX(0, 5), map.getYBytileY(1, 5));
-				candyBottomRight = new Candy(map.getXBytileX(1, 7), map.getYBytileY(1, 5));
-				
+				candyTopLeft = new Candy(Map.TOPLEFT, 8, 5);
+				candyTopRight = new Candy(Map.TOPRIGHT, 3, 3);
+				candyBottomLeft = new Candy(Map.BOTTOMLEFT, 8, 0);
+				candyBottomRight = new Candy(Map.BOTTOMRIGHT, 3, 0);	
 			}
+			else if (mapId == 1) {
+				playerTopLeft = new Player(Map.TOPLEFT, 0, 0);
+				playerTopRight = new Player(Map.TOPRIGHT, 0, 0);
+				playerBottomLeft = new Player(Map.BOTTOMLEFT, 0, 0);
+				playerBottomRight = new Player(Map.BOTTOMRIGHT, 0, 0);
+				
+				candyTopLeft = new Candy(Map.TOPLEFT, 2, 3);
+				candyTopRight = new Candy(Map.TOPRIGHT, 7, 5);
+				candyBottomLeft = new Candy(Map.BOTTOMLEFT, 5, 5);
+				candyBottomRight = new Candy(Map.BOTTOMRIGHT, 7, 5);
+			}
+			
 		}
 		
 		override public function begin(): void {
@@ -68,8 +80,10 @@ package worlds
 				candyBottomLeft.isHit(playerBottomLeft.x, playerBottomLeft.y) &&
 				candyBottomRight.isHit(playerBottomRight.x, playerBottomRight.y))
 				trace("won");
-			
-			
+				
+			if (Input.pressed(Key.ESCAPE)){
+				WorldSwitcher.switchToMain();
+			}
 		}
 		
 	}

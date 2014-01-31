@@ -9,6 +9,11 @@ package entities
 	 */
 	public class Map extends Entity {
 		
+		public static const TOPLEFT: int = 0;
+		public static const TOPRIGHT: int = 1;
+		public static const BOTTOMLEFT: int = 2;
+		public static const BOTTOMRIGHT: int = 3;
+		
 		public var mapId: int;
 		private var image: Image;
 		
@@ -17,11 +22,12 @@ package entities
 		}
 
 		override public function added(): void {
+			//add maps here (4/4)
 			if (mapId == 0){
-				image = new Image(assets.MapTemplate);
-				mask = new Pixelmask(assets.MapTemplate)
+				image = new Image(assets.Map0);
+				mask = new Pixelmask(assets.Map0)
 			}
-			if (mapId == -1) {
+			else if (mapId == 1) {
 				image = new Image(assets.TestMap);
 				mask = new Pixelmask(assets.TestMap);
 			}
@@ -35,21 +41,21 @@ package entities
 		
 		/**
 		 * 
-		 * @param	maze 0 if left, 1 if right
+		 * @param	maze 0 topleft, 1 topright, 2 bottomleft, 3 bottomright
 		 * @param	tileX the X-coord of the tile
 		 * @return the x of the middle of the tile
 		 */
-		public function getXBytileX(maze: int, tileX: int): int {
+		public static function getXBytileX(maze: int, tileX: int): int {
 			if (maze < 0)
 				maze = 0;
-			else if (maze > 1)
-				maze = 1;
+			else if (maze > 3)
+				maze = 3;
 			if (tileX < 0)
 				tileX = 0;
 			else if (tileX > 8)
 				tileX = 8;
 				
-			if (maze == 0)
+			if (maze == TOPLEFT || maze == BOTTOMLEFT)
 				return (40 + tileX * 40);
 			else
 				return (440 + tileX * 40);
@@ -61,17 +67,17 @@ package entities
 		 * @param	tileY the Y-coord of the tile
 		 * @return the y of the middle of the tile
 		 */
-		public function getYBytileY(maze: int, tileY: int): int {
+		public static function getYBytileY(maze: int, tileY: int): int {
 			if (maze < 0)
 				maze = 0;
-			else if (maze > 1)
-				maze = 1;
+			else if (maze > 3)
+				maze = 3;
 			if (tileY < 0)
 				tileY = 0;
 			else if (tileY > 5)
 				tileY = 5;
 				
-			if (maze == 0)
+			if (maze == TOPLEFT || maze == TOPRIGHT)
 				return (40 + tileY * 40);
 			else
 				return (360 + tileY * 40);

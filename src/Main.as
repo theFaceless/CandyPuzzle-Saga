@@ -3,6 +3,7 @@ package
 	import flash.display.Sprite;
 	import flash.events.Event;
 	import net.flashpunk.Engine;
+	import worlds.MainMenu;
 	import worlds.MainWorld;
 	import net.flashpunk.FP;
 	
@@ -17,14 +18,13 @@ package
 		
 		public function Main():void 
 		{
-			super(800, 600, 60, true);
-			mainWorld = new MainWorld();
+			super(800, 600, 30, true);
 		}
 		
 		override public function init():void 
 		{
 			super.init();
-			FP.world = mainWorld;
+			FP.world = new MainMenu();
 		}
 		
 	}

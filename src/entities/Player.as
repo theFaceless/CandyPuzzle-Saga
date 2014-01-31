@@ -17,22 +17,21 @@ package entities
 	 */
 	public class Player extends Entity {
 		
-		protected var speed:Number;
-		protected var l:String, r:String, u:String, d:String;
+		protected var speed:int;
 		protected var image:Image;
 		
 		protected var startX:int;
 		protected var startY:int;
 		protected var hasMoved: Boolean;
 
-		public function Player(startX: int, startY: int) {
+		public function Player(maze: int, startTileX: int, startTileY: int) {
 			super();
-			this.speed = References.SPEED;
-			this.x = startX;
-			this.y = startY;
+			speed = References.SPEED;
+			x = Map.getXBytileX(maze, startTileX);
+			y = Map.getYBytileY(maze, startTileY);
 			
-			this.startX = startX;
-			this.startY = startY;
+			this.startX = x;
+			this.startY = y;
 		}
 		
 		override public function added(): void {
@@ -61,68 +60,72 @@ package entities
 		protected function processInput():void {
 			hasMoved = false;
 			var i: int;
+			var speed: int;
 			if (Input.check(Key.UP)) {
-				for (i = 0; i < 10 && !hasMoved; i++ ) {
-					if (!collideWithMap(int(x + i), int(y - speed*FP.elapsed))) {
-						y -= speed * FP.elapsed;
-						x += i;
-						hasMoved = true;
-					}
-					else if (!collideWithMap(int(x - i), int(y - speed*FP.elapsed))) {
-						y -= speed * FP.elapsed;
-						x -= i;
-						hasMoved = true;
-					}
-				}
-				
-			}
-			hasMoved = false;
-			if (Input.check(Key.DOWN)) {
-				for (i = 0; i < 10 && !hasMoved; i++ ) {
-					if (!collideWithMap(int(x+i), int(y + speed*FP.elapsed))) {
-						y += speed * FP.elapsed;
-						x += i;
-						hasMoved = true;
-					}
-					else if (!collideWithMap(int(x-i), int(y + speed*FP.elapsed))) {
-						y += speed * FP.elapsed;
-						x -= i;
-						hasMoved = true;
+				for (speed = this.speed; speed > 0; speed--) {
+					for (i = 0; i < 10 && !hasMoved; i++ ) {
+						if (!collideWithMap(x + i, y - speed)) {
+							y -= speed;
+							x += i;
+							hasMoved = true;
+						}
+						else if (!collideWithMap(x - i, y - speed)) {
+							y -= speed;
+							x -= i;
+							hasMoved = true;
+						}
 					}
 				}
 				
 			}
-			hasMoved = false;
-			if (Input.check(Key.LEFT)) {
-				for (i = 0; i < 10 && !hasMoved; i++ ) {
-					if (!collideWithMap(int(x - speed * FP.elapsed), int(y+i))) {
-						x -= speed * FP.elapsed;
-						y += i;
-						hasMoved = true;
-					}
-					if (!collideWithMap(int(x - speed * FP.elapsed), int(y-i))) {
-						x -= speed * FP.elapsed;
-						y -= i;
-						hasMoved = true;
+			else if (Input.check(Key.DOWN)) {
+				for (speed = this.speed; speed > 0; speed--) {
+					for (i = 0; i < 10 && !hasMoved; i++ ) {
+						if (!collideWithMap(x + i, y + speed)) {
+							y += speed;
+							x += i;
+							hasMoved = true;
+						}
+						else if (!collideWithMap(x - i, y + speed)) {
+							y += speed;
+							x -= i;
+							hasMoved = true;
+						}
 					}
 				}
 				
 			}
-			hasMoved = false;
-			if (Input.check(Key.RIGHT)) {
-				for (i = 0; i < 10 && !hasMoved; i++ ) {
-					if (!collideWithMap(int(x + speed * FP.elapsed), int(y+i))) {
-						x += speed * FP.elapsed;
-						y += i;
-						hasMoved = true;
-					}
-					if (!collideWithMap(int(x + speed * FP.elapsed), int(y-i))) {
-						x += speed * FP.elapsed;
-						y -= i;
-						hasMoved = true;
+			else if (Input.check(Key.LEFT)) {
+				for (speed = this.speed; speed > 0; speed--) {
+					for (i = 0; i < 10 && !hasMoved; i++ ) {
+						if (!collideWithMap(x - speed, y + i)) {
+							x -= speed;
+							y += i;
+							hasMoved = true;
+						}
+						if (!collideWithMap(x - speed, y - i)) {
+							x -= speed;
+							y -= i;
+							hasMoved = true;
+						}
 					}
 				}
-				
+			}
+			else if (Input.check(Key.RIGHT)) {
+				for (speed = this.speed; speed > 0; speed--) {
+					for (i = 0; i < 10 && !hasMoved; i++ ) {
+						if (!collideWithMap(x + speed, y + i)) {
+							x += speed;
+							y += i;
+							hasMoved = true;
+						}
+						if (!collideWithMap(x + speed, y - i)) {
+							x += speed;
+							y -= i;
+							hasMoved = true;
+						}
+					}
+				}
 			}
 			
 			if (Input.check(Key.R)){
