@@ -38,7 +38,7 @@ package entities
 		}
 		
 		public function isHit(x: int, y: int): Boolean {
-			if (Math.abs(this.x - x) < 5 && Math.abs(this.y - y) < 5)
+			if (Math.abs(this.x - x) < References.SPEED && Math.abs(this.y - y) < References.SPEED)
 				return true;
 			else
 				return false;

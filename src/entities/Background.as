@@ -24,7 +24,7 @@ package entities
 			if (img)
 				image = new Image(img);
 			else
-				image = Image.createRect(800, 600, 0xFF3333, 1);
+				image = Image.createRect(800, 600, color, 1);
 			image.centerOrigin();
 			x = FP.width / 2;
 			y = FP.height / 2;

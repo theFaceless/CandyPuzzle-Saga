@@ -79,7 +79,7 @@ package worlds
 				candyTopRight.isHit(playerTopRight.x, playerTopRight.y) &&
 				candyBottomLeft.isHit(playerBottomLeft.x, playerBottomLeft.y) &&
 				candyBottomRight.isHit(playerBottomRight.x, playerBottomRight.y))
-				trace("won");
+				WorldSwitcher.switchToWonScreen();
 				
 			if (Input.pressed(Key.ESCAPE)){
 				WorldSwitcher.switchToMain();

@@ -1,6 +1,7 @@
 package entities 
 {
 	import net.flashpunk.Entity;
+	import net.flashpunk.FP;
 	import net.flashpunk.graphics.Image;
 	import net.flashpunk.masks.Pixelmask;
 	/**
@@ -33,6 +34,8 @@ package entities
 			}
 			image.color = 0x33FF33;
 			graphic = image;
+			
+			FP.world.add(new Background(0x444444));
 		}
 		
 		override public function update(): void {

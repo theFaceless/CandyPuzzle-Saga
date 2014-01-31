@@ -39,7 +39,7 @@ package worlds
 				maps[i].unlock();
 			}
 			
-			add(new Background());
+			add(new Background(0xFF3333));
 			calculatePositions();
 		}
 		

@@ -4,6 +4,7 @@ package utils
 	import net.flashpunk.FP;
 	import worlds.MainMenu;
 	import worlds.MainWorld;
+	import worlds.WonScreen;
 	
 	/**
 	 * ...
@@ -17,6 +18,10 @@ package utils
 		
 		public static function switchToMap(id: int): void {
 			FP.world = new MainWorld(id);
+		}
+		
+		public static function switchToWonScreen(): void {
+			FP.world = new WonScreen();
 		}
 		
 	}
