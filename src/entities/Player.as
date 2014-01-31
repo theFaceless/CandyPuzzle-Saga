@@ -125,6 +125,10 @@ package entities
 				
 			}
 			
+			if (Input.check(Key.R)){
+				x = startX;
+				y = startY;
+			}
 		}
 		
 	}
