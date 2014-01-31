@@ -2,6 +2,7 @@ package entities
 {
 	import net.flashpunk.Entity;
 	import net.flashpunk.graphics.Image;
+	import utils.Util;
 	/**
 	 * ...
 	 * @author Wout Coenen
@@ -18,14 +19,28 @@ package entities
 		}
 		
 		override public function added(): void {
-			image = new Image(assets.Candy1Img);
+			var randomCandy: int = Util.randomNumber(1, 2);
+			switch(randomCandy) {
+				case 1:
+					image = new Image(assets.Candy1Img);
+					break;
+				case 2:
+					image = new Image(assets.Candy2Img);
+					break;
+				default:
+					image = new Image(assets.Candy1Img);
+			}
 			image.centerOrigin();
 			graphic = image;
 			setHitbox(image.width, image.height, -(image.width / 2), -(image.height / 2));
 			
 		}
 		
-		override public function update():void { 
+		public function isHit(x: int, y: int): Boolean {
+			if (Math.abs(this.x - x) < 5 && Math.abs(this.y - y) < 5)
+				return true;
+			else
+				return false;
 		}
 		
 	}

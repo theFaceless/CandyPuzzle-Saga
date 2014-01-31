@@ -30,17 +30,20 @@ package worlds
 		
 		public function MainWorld(mapId: int = 0) {
 			super();
+			//testing code
+			mapId = -1;
+			//end of testing code
 			map = new Map(mapId);
 			if (mapId <= 0) {
-				playerTopLeft = new Player(40, 40);
-				playerTopRight = new Player(760, 40);
-				playerBottomLeft = new Player(40, 560);
-				playerBottomRight = new Player(760, 560);
+				playerTopLeft = new Player(map.getXBytileX(0, 0), map.getYBytileY(0, 0));
+				playerTopRight = new Player(map.getXBytileX(1, 0), map.getYBytileY(0, 0));
+				playerBottomLeft = new Player(map.getXBytileX(0, 0), map.getYBytileY(1, 0));
+				playerBottomRight = new Player(map.getXBytileX(1, 0), map.getYBytileY(1, 0));
 				
-				candyTopLeft = new Candy(40, 40);
-				candyTopRight = new Candy(760, 40);
-				candyBottomLeft = new Candy(40, 560);
-				candyBottomRight = new Candy(760, 560);
+				candyTopLeft = new Candy(map.getXBytileX(0, 2), map.getYBytileY(0, 3));
+				candyTopRight = new Candy(map.getXBytileX(1, 7), map.getYBytileY(0, 5));
+				candyBottomLeft = new Candy(map.getXBytileX(0, 5), map.getYBytileY(1, 5));
+				candyBottomRight = new Candy(map.getXBytileX(1, 7), map.getYBytileY(1, 5));
 				
 			}
 		}
@@ -59,6 +62,14 @@ package worlds
 		
 		override public function update(): void {
 			super.update();
+			
+			if (candyTopLeft.isHit(playerTopLeft.x, playerTopLeft.y) &&
+				candyTopRight.isHit(playerTopRight.x, playerTopRight.y) &&
+				candyBottomLeft.isHit(playerBottomLeft.x, playerBottomLeft.y) &&
+				candyBottomRight.isHit(playerBottomRight.x, playerBottomRight.y))
+				trace("won");
+			
+			
 		}
 		
 	}

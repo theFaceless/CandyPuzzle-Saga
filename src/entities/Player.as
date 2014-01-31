@@ -39,7 +39,7 @@ package entities
 			image = new Image(assets.playerIMG);
 			image.centerOrigin();
 			graphic = image;
-			setHitbox(image.width, image.height, 0, 0);
+			setHitbox(image.width, image.height, -(image.width / 2), -(image.height / 2));
 			
 		}
 		
@@ -53,7 +53,7 @@ package entities
 		 * @param	y
 		 */
 		public function collideWithMap(x:int, y:int):Boolean {
-			return Boolean (collideWith(MainWorld.map, x- image.width / 2, y - image.height / 2));
+			return Boolean (collideWith(MainWorld.map, x - image.width, y - image.height));
 		}
 		
 		
@@ -63,12 +63,12 @@ package entities
 			var i: int;
 			if (Input.check(Key.UP)) {
 				for (i = 0; i < 10 && !hasMoved; i++ ) {
-					if (!collideWithMap((x + i), y - (speed*FP.elapsed))) {
+					if (!collideWithMap(int(x + i), int(y - speed*FP.elapsed))) {
 						y -= speed * FP.elapsed;
 						x += i;
 						hasMoved = true;
 					}
-					else if (!collideWithMap((x - i), y - (speed*FP.elapsed))) {
+					else if (!collideWithMap(int(x - i), int(y - speed*FP.elapsed))) {
 						y -= speed * FP.elapsed;
 						x -= i;
 						hasMoved = true;
@@ -79,12 +79,12 @@ package entities
 			hasMoved = false;
 			if (Input.check(Key.DOWN)) {
 				for (i = 0; i < 10 && !hasMoved; i++ ) {
-					if (!collideWithMap((x+i), y + (speed*FP.elapsed))) {
+					if (!collideWithMap(int(x+i), int(y + speed*FP.elapsed))) {
 						y += speed * FP.elapsed;
 						x += i;
 						hasMoved = true;
 					}
-					else if (!collideWithMap((x-i) - image.width / 2, y + (speed*FP.elapsed))) {
+					else if (!collideWithMap(int(x-i), int(y + speed*FP.elapsed))) {
 						y += speed * FP.elapsed;
 						x -= i;
 						hasMoved = true;
@@ -95,12 +95,12 @@ package entities
 			hasMoved = false;
 			if (Input.check(Key.LEFT)) {
 				for (i = 0; i < 10 && !hasMoved; i++ ) {
-					if (!collideWithMap(x - speed * FP.elapsed, (y+i))) {
+					if (!collideWithMap(int(x - speed * FP.elapsed), int(y+i))) {
 						x -= speed * FP.elapsed;
 						y += i;
 						hasMoved = true;
 					}
-					if (!collideWithMap(x - speed * FP.elapsed, (y-i))) {
+					if (!collideWithMap(int(x - speed * FP.elapsed), int(y-i))) {
 						x -= speed * FP.elapsed;
 						y -= i;
 						hasMoved = true;
@@ -111,12 +111,12 @@ package entities
 			hasMoved = false;
 			if (Input.check(Key.RIGHT)) {
 				for (i = 0; i < 10 && !hasMoved; i++ ) {
-					if (!collideWithMap(x + speed * FP.elapsed, (y+i))) {
+					if (!collideWithMap(int(x + speed * FP.elapsed), int(y+i))) {
 						x += speed * FP.elapsed;
 						y += i;
 						hasMoved = true;
 					}
-					if (!collideWithMap(x + speed * FP.elapsed, (y-i))) {
+					if (!collideWithMap(int(x + speed * FP.elapsed), int(y-i))) {
 						x += speed * FP.elapsed;
 						y -= i;
 						hasMoved = true;
