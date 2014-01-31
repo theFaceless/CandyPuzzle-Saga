@@ -17,9 +17,11 @@ package entities
 		}
 
 		override public function added(): void {
-			image = new Image(assets.MapTemplate);
+			if (mapId <= 0){
+				image = new Image(assets.MapTemplate);
+				mask = new Pixelmask(assets.MapTemplate)
+			}
 			image.color = 0x33FF33;
-			mask = new Pixelmask(assets.MapTemplate)
 			graphic = image;
 		}
 		
